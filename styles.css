@@ -1,0 +1,405 @@
+/* ==========================================================================
+   Flourish Commons — stylesheet
+   A restrained, institutional site. Typography carries most of the weight;
+   the Steward's Mark (the interlace glyph) recurs quietly as the one
+   signature element, used as section dividers rather than decoration.
+   ========================================================================== */
+
+:root {
+    /* Colour — drawn directly from the Steward's Mark */
+    --bg: #F6F3EC;
+    --bg-alt: #EEE7D8;
+    --text: #21241F;
+    --text-muted: #666C5D;
+    --primary: #3B4E41;   /* deep green, from the mark */
+    --accent: #8C8064;    /* deepened tan, used sparingly for links/hover */
+    --border: #DDD5C0;
+    --border-strong: #C9BEA0;
+
+    /* Type */
+    --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+    /* Layout */
+    --content-width: 1100px;
+    --measure: 700px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Reset / base                                                           */
+/* ---------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+    background: var(--bg);
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--text);
+}
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul { margin: 0; padding: 0; list-style: none; }
+
+img { display: block; max-width: 100%; }
+
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 1px;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--primary);
+    color: var(--bg);
+    padding: 0.75em 1.25em;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    z-index: 100;
+}
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 0.85em;
+}
+
+.muted { color: var(--text-muted); }
+
+/* ---------------------------------------------------------------------- */
+/* Header                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.header-inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 1.35rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.brand-mark { width: 28px; height: 28px; flex-shrink: 0; }
+
+.brand-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.site-nav {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+}
+
+.site-nav a {
+    padding: 0.25rem 0.05rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 160ms ease, color 160ms ease;
+}
+
+.site-nav a:hover {
+    border-color: var(--accent);
+    color: var(--primary);
+}
+
+@media (max-width: 480px) {
+    .header-inner {
+        flex-wrap: wrap;
+        row-gap: 0.85rem;
+    }
+    .site-nav { gap: 1.25rem; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Hero                                                                    */
+/* ---------------------------------------------------------------------- */
+
+.hero {
+    position: relative;
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 7rem 1.5rem 6rem;
+    overflow: hidden;
+}
+
+.hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--measure);
+}
+
+.hero h1 {
+    font-size: clamp(2.75rem, 6vw, 4.25rem);
+    margin-bottom: 0.55em;
+}
+
+.hero-statement {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+    font-weight: 400;
+    color: var(--text-muted);
+    max-width: 34ch;
+    margin: 0;
+}
+
+.hero-mark {
+    position: absolute;
+    right: -40px;
+    bottom: -60px;
+    width: 260px;
+    height: 260px;
+    opacity: 0.07;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 640px) {
+    .hero { padding: 4.5rem 1.25rem 3.5rem; }
+    .hero-mark { width: 160px; height: 160px; right: -30px; bottom: -30px; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Section dividers — the Steward's Mark, used quietly                    */
+/* ---------------------------------------------------------------------- */
+
+.divider {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.divider img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.65;
+    flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Generic section                                                        */
+/* ---------------------------------------------------------------------- */
+
+.section {
+    padding: 4.5rem 0;
+}
+
+.section-inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.section-label h2 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    margin-bottom: 2.25rem;
+}
+
+/* About — label + measure-width copy, side by side on wide screens */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+    gap: 2.5rem 3rem;
+}
+
+.about-grid .section-label .eyebrow { margin-top: 0.4em; }
+
+.section-body { max-width: var(--measure); }
+
+.section-body h2 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    margin-bottom: 1em;
+}
+
+.section-body p {
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+@media (max-width: 720px) {
+    .about-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Initiatives                                                            */
+/* ---------------------------------------------------------------------- */
+
+.initiative-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+}
+
+.initiative {
+    display: block;
+    background: var(--bg);
+    padding: 2.1rem 1.75rem;
+    transition: background 160ms ease;
+}
+
+.initiative:hover,
+.initiative:focus-visible {
+    background: var(--bg-alt);
+}
+
+.initiative h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Network — visually distinct: muted tone, quieter typography            */
+/* ---------------------------------------------------------------------- */
+
+.section-network {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.network-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+}
+
+.network-list li {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border-strong);
+    padding: 0.55rem 1.1rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Footer                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.site-footer {
+    border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 2.75rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    font-size: 0.92rem;
+}
+
+.footer-brand p { margin: 0; }
+.footer-brand .muted { font-size: 0.88rem; margin-top: 0.15em; }
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.footer-links a {
+    border-bottom: 1px solid transparent;
+    transition: border-color 160ms ease, color 160ms ease;
+}
+
+.footer-links a:hover { border-color: var(--accent); color: var(--primary); }
+
+.footer-copyright {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding-top: 1.5rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--border);
+}
+
+@media (min-width: 560px) {
+    .footer-copyright {
+        width: auto;
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+    }
+}
+
+/* Fallback spacing for browsers without flexbox gap support */
+@supports not (gap: 1rem) {
+    .site-nav a + a { margin-left: 2rem; }
+    .footer-links a + a { margin-left: 1.5rem; }
+}
